@@ -1,0 +1,55 @@
+<div class="container">
+  <h1>Üyeler Listesi</h1>
+  <h3 *ngIf="secOyun">
+    <b>Oyun Kodu : </b> {{secOyun.oyunKodu}} &nbsp;&nbsp;
+    <b>Oyun Adı : </b> {{secOyun.oyunAdi}} &nbsp;&nbsp;
+    <b>Oyun Fiyat : </b>{{secOyun.oyunFiyat}}
+  </h3>
+
+  <button mat-fab color="primary" matTooltip="Oyun Listesi" [routerLink]="['/oyun']">
+    <mat-icon aria-label="label">arrow_back</mat-icon>
+  </button>&nbsp;
+  <button mat-fab color="primary" matTooltip="Üyeler Ekle" (click)="Ekle()">
+    <mat-icon aria-label="label">person_add</mat-icon>
+  </button>
+  <p>&nbsp;</p>
+  <h3 style="color:red" *ngIf="kayitlar?.length==0">Henüz Üyeler Eklenmedi!</h3>
+  <mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+    <ng-container matColumnDef="uyeNo">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Üyeler No
+      </mat-header-cell>
+      <mat-cell *matCellDef="let kayit"> {{kayit.uyeBilgi.uyeNo}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="uyeAdsoyad">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Adı Soyadı
+      </mat-header-cell>
+      <mat-cell *matCellDef="let kayit"> {{kayit.uyeBilgi.uyeAdsoyad}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="uyeDogTarih">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Doğum Tarihi
+      </mat-header-cell>
+      <mat-cell *matCellDef="let kayit"> {{kayit.uyeBilgi.uyeDogTarih}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="uyeOyunSayisi">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Oyun Sayısı
+      </mat-header-cell>
+      <mat-cell *matCellDef="let kayit"> {{kayit.uyeBilgi.uyeOyunSayisi}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="islemler">
+      <mat-header-cell *matHeaderCellDef> İşlemler
+      </mat-header-cell>
+      <mat-cell *matCellDef="let kayit">
+
+        <button mat-icon-button color="warn" matTooltip="Üyeleryi Oyunten Sil" (click)="Sil(kayit)">
+          <mat-icon aria-label="label">delete</mat-icon>
+        </button>
+
+      </mat-cell>
+    </ng-container>
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+  <mat-paginator [pageSizeOptions]="[10, 25,50, 100,500]" showFirstLastButtons>
+  </mat-paginator>
+
+</div>

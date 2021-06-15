@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="DB03ModelStoreContainer" CdmEntityContainer="DB03Entities">
+    <EntitySetMapping Name="Oyun">
+      <EntityTypeMapping TypeName="DB03Model.Oyun">
+        <MappingFragment StoreEntitySet="Oyun">
+          <ScalarProperty Name="oyunFiyat" ColumnName="oyunFiyat" />
+          <ScalarProperty Name="oyunAdi" ColumnName="oyunAdi" />
+          <ScalarProperty Name="oyunKodu" ColumnName="oyunKodu" />
+          <ScalarProperty Name="oyunId" ColumnName="oyunId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Kayit">
+      <EntityTypeMapping TypeName="DB03Model.Kayit">
+        <MappingFragment StoreEntitySet="Kayit">
+          <ScalarProperty Name="kayitUyeId" ColumnName="kayitUyeId" />
+          <ScalarProperty Name="kayitOyunId" ColumnName="kayitOyunId" />
+          <ScalarProperty Name="kayitId" ColumnName="kayitId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Uyeler">
+      <EntityTypeMapping TypeName="DB03Model.Uyeler">
+        <MappingFragment StoreEntitySet="Uyeler">
+          <ScalarProperty Name="uyeDogTarih" ColumnName="uyeDogTarih" />
+          <ScalarProperty Name="uyeAdsoyad" ColumnName="uyeAdsoyad" />
+          <ScalarProperty Name="uyeNo" ColumnName="uyeNo" />
+          <ScalarProperty Name="uyeId" ColumnName="uyeId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

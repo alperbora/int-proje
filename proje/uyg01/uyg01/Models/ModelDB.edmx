@@ -1,0 +1,200 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="DB03Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Oyun">
+          <Key>
+            <PropertyRef Name="oyunId" />
+          </Key>
+          <Property Name="oyunId" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="oyunKodu" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="oyunAdi" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="oyunFiyat" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Kayit">
+          <Key>
+            <PropertyRef Name="kayitId" />
+          </Key>
+          <Property Name="kayitId" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="kayitOyunId" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="kayitUyeId" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Uyeler">
+          <Key>
+            <PropertyRef Name="uyeId" />
+          </Key>
+          <Property Name="uyeId" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="uyeNo" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="uyeAdsoyad" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="uyeDogTarih" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Kayit_ToOyun">
+          <End Role="Oyun" Type="Self.Oyun" Multiplicity="1" />
+          <End Role="Kayit" Type="Self.Kayit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Oyun">
+              <PropertyRef Name="oyunId" />
+            </Principal>
+            <Dependent Role="Kayit">
+              <PropertyRef Name="kayitOyunId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Kayit_ToUyeler">
+          <End Role="Uyeler" Type="Self.Uyeler" Multiplicity="1" />
+          <End Role="Kayit" Type="Self.Kayit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Uyeler">
+              <PropertyRef Name="uyeId" />
+            </Principal>
+            <Dependent Role="Kayit">
+              <PropertyRef Name="kayitUyeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DB03ModelStoreContainer">
+          <EntitySet Name="Oyun" EntityType="Self.Oyun" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Kayit" EntityType="Self.Kayit" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Uyeler" EntityType="Self.Uyeler" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Kayit_ToOyun" Association="Self.FK_Kayit_ToOyun">
+            <End Role="Oyun" EntitySet="Oyun" />
+            <End Role="Kayit" EntitySet="Kayit" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Kayit_ToUyeler" Association="Self.FK_Kayit_ToUyeler">
+            <End Role="Uyeler" EntitySet="Uyeler" />
+            <End Role="Kayit" EntitySet="Kayit" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DB03Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="DB03Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Oyun" EntityType="DB03Model.Oyun" />
+          <EntitySet Name="Kayit" EntityType="DB03Model.Kayit" />
+          <EntitySet Name="Uyeler" EntityType="DB03Model.Uyeler" />
+          <AssociationSet Name="FK_Kayit_ToOyun" Association="DB03Model.FK_Kayit_ToOyun">
+            <End Role="Oyun" EntitySet="Oyun" />
+            <End Role="Kayit" EntitySet="Kayit" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Kayit_ToUyeler" Association="DB03Model.FK_Kayit_ToUyeler">
+            <End Role="Uyeler" EntitySet="Uyeler" />
+            <End Role="Kayit" EntitySet="Kayit" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Oyun">
+          <Key>
+            <PropertyRef Name="oyunId" />
+          </Key>
+          <Property Name="oyunId" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="oyunKodu" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="oyunAdi" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="oyunFiyat" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Kayit" Relationship="DB03Model.FK_Kayit_ToOyun" FromRole="Oyun" ToRole="Kayit" />
+        </EntityType>
+        <EntityType Name="Kayit">
+          <Key>
+            <PropertyRef Name="kayitId" />
+          </Key>
+          <Property Name="kayitId" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="kayitOyunId" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="kayitUyeId" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Oyun" Relationship="DB03Model.FK_Kayit_ToOyun" FromRole="Kayit" ToRole="Oyun" />
+          <NavigationProperty Name="Uyeler" Relationship="DB03Model.FK_Kayit_ToUyeler" FromRole="Kayit" ToRole="Uyeler" />
+        </EntityType>
+        <EntityType Name="Uyeler">
+          <Key>
+            <PropertyRef Name="uyeId" />
+          </Key>
+          <Property Name="uyeId" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="uyeNo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="uyeAdsoyad" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="uyeDogTarih" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Kayit" Relationship="DB03Model.FK_Kayit_ToUyeler" FromRole="Uyeler" ToRole="Kayit" />
+        </EntityType>
+        <Association Name="FK_Kayit_ToOyun">
+          <End Type="DB03Model.Oyun" Role="Oyun" Multiplicity="1" />
+          <End Type="DB03Model.Kayit" Role="Kayit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Oyun">
+              <PropertyRef Name="oyunId" />
+            </Principal>
+            <Dependent Role="Kayit">
+              <PropertyRef Name="kayitOyunId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Kayit_ToUyeler">
+          <End Type="DB03Model.Uyeler" Role="Uyeler" Multiplicity="1" />
+          <End Type="DB03Model.Kayit" Role="Kayit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Uyeler">
+              <PropertyRef Name="uyeId" />
+            </Principal>
+            <Dependent Role="Kayit">
+              <PropertyRef Name="kayitUyeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DB03ModelStoreContainer" CdmEntityContainer="DB03Entities">
+          <EntitySetMapping Name="Oyun">
+            <EntityTypeMapping TypeName="DB03Model.Oyun">
+              <MappingFragment StoreEntitySet="Oyun">
+                <ScalarProperty Name="oyunFiyat" ColumnName="oyunFiyat" />
+                <ScalarProperty Name="oyunAdi" ColumnName="oyunAdi" />
+                <ScalarProperty Name="oyunKodu" ColumnName="oyunKodu" />
+                <ScalarProperty Name="oyunId" ColumnName="oyunId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Kayit">
+            <EntityTypeMapping TypeName="DB03Model.Kayit">
+              <MappingFragment StoreEntitySet="Kayit">
+                <ScalarProperty Name="kayitUyeId" ColumnName="kayitUyeId" />
+                <ScalarProperty Name="kayitOyunId" ColumnName="kayitOyunId" />
+                <ScalarProperty Name="kayitId" ColumnName="kayitId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Uyeler">
+            <EntityTypeMapping TypeName="DB03Model.Uyeler">
+              <MappingFragment StoreEntitySet="Uyeler">
+                <ScalarProperty Name="uyeDogTarih" ColumnName="uyeDogTarih" />
+                <ScalarProperty Name="uyeAdsoyad" ColumnName="uyeAdsoyad" />
+                <ScalarProperty Name="uyeNo" ColumnName="uyeNo" />
+                <ScalarProperty Name="uyeId" ColumnName="uyeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
